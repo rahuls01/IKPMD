@@ -1,0 +1,107 @@
+{
+  "project_info": {
+    "project_number": "713048751530",
+    "firebase_url": "https://ikpmd-f12f0.firebaseio.com",
+    "project_id": "ikpmd-f12f0",
+    "storage_bucket": "ikpmd-f12f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713048751530:android:4100183066222ef9",
+        "android_client_info": {
+          "package_name": "com.example.djsni.studievolg_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "713048751530-b21a3eiaatgbai1q8s8eb9d2gqtcvbr0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.djsni.studievolg_1",
+            "certificate_hash": "79cc8ffde293c463ed7d31b72ece35b7f07f21b1"
+          }
+        },
+        {
+          "client_id": "713048751530-qbuspp5c0ggsuic3jqgfeohfb9896vds.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "713048751530-qbuspp5c0ggsuic3jqgfeohfb9896vds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9dkJXb9a433AcE5MLNLLuMEu_lBa-CPQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "713048751530-qbuspp5c0ggsuic3jqgfeohfb9896vds.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713048751530:android:5705e6eadedf9338",
+        "android_client_info": {
+          "package_name": "com.example.djsni.studievolg_2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "713048751530-t3j7ov12ibiio1inse0kjta03rp29js2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.djsni.studievolg_2",
+            "certificate_hash": "79cc8ffde293c463ed7d31b72ece35b7f07f21b1"
+          }
+        },
+        {
+          "client_id": "713048751530-qbuspp5c0ggsuic3jqgfeohfb9896vds.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "713048751530-qbuspp5c0ggsuic3jqgfeohfb9896vds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9dkJXb9a433AcE5MLNLLuMEu_lBa-CPQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "713048751530-qbuspp5c0ggsuic3jqgfeohfb9896vds.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
