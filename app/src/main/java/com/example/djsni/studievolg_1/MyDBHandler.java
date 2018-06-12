@@ -10,8 +10,15 @@ import java.util.ArrayList;
 
 public class MyDBHandler  extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Vakken.db";
+//     tabel voor de vakken
     private static final String TABLE_NAME = "Vak";
     private static final int DATABASE_VERSION = 1;
+
+//    om de naam op te slaan
+    private static final String TABLE_NAME_2 = "Naam";
+    public static final String NAAM = "naam";
+
+
 
     public static final String VAK_ID = "id";
     public static final String VAK_SNUMMER = "studentnummer";
@@ -46,6 +53,14 @@ public class MyDBHandler  extends SQLiteOpenHelper {
                 + ")";
 
         db.execSQL(CREATE_VAK_TABLE);
+
+        String CREATE_NAAM_TABLE = "CREATE TABLE " + TABLE_NAME_2 + "("
+                + NAAM+ " naam,"
+                + ")";
+
+        db.execSQL(CREATE_VAK_TABLE);
+        db.execSQL(CREATE_NAAM_TABLE);
+
     }
 
     public void addVak(vak vak, String snummer) {
@@ -64,7 +79,7 @@ public class MyDBHandler  extends SQLiteOpenHelper {
 
             db.insertOrThrow(TABLE_NAME, null, values);
             db.setTransactionSuccessful();
-            System.out.println("geert het werkt");
+            System.out.println("De data word opgeslagen");
             }
 
         catch (Exception e) {
@@ -77,6 +92,30 @@ public class MyDBHandler  extends SQLiteOpenHelper {
 
     };
 
+    public void addNaam(String snummer) {
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+
+            ContentValues values = new ContentValues();
+
+            values.put(NAAM, snummer);
+
+            db.insertOrThrow(TABLE_NAME_2, null, values);
+            db.setTransactionSuccessful();
+            System.out.println("De naam word opgeslagen");
+        }
+
+        catch (Exception e) {
+            e.printStackTrace();
+        } finally
+        {
+            db.endTransaction();
+        }
+
+
+    };
 
     public boolean checkIfexists(){
         SQLiteDatabase db = getWritableDatabase();
@@ -92,7 +131,20 @@ public class MyDBHandler  extends SQLiteOpenHelper {
             return true;
         }
     }
+    public boolean checkIfexistNaam(){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = null;
+        String sql = "SELECT * FROM "+ TABLE_NAME_2 ;
+        cursor = db.rawQuery(sql ,null);
+        int aantal = cursor.getCount();
 
+        if (aantal == 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
 
     public ArrayList<vak> getAll() {
 
@@ -124,6 +176,14 @@ public class MyDBHandler  extends SQLiteOpenHelper {
 
     }
 
+    public String getNaam() {
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor  = db.rawQuery("SELECT * FROM "+ TABLE_NAME_2 + ";", null);
+        System.out.println("name: "+ cursor.getString(cursor.getColumnIndex(NAAM)));
+        String naam = cursor.getString(cursor.getColumnIndex(NAAM));
+        return naam;
+
+    }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
