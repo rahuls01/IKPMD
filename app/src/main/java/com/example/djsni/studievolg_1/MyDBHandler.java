@@ -2,8 +2,11 @@ package com.example.djsni.studievolg_1;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
 
 public class MyDBHandler  extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Vakken.db";
@@ -74,6 +77,52 @@ public class MyDBHandler  extends SQLiteOpenHelper {
 
     };
 
+
+    public boolean checkIfexists(){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = null;
+        String sql = "SELECT * FROM "+ TABLE_NAME ;
+        cursor = db.rawQuery(sql ,null);
+        int aantal = cursor.getCount();
+
+        if (aantal == 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+
+    public ArrayList<vak> getAll() {
+
+        SQLiteDatabase db = getWritableDatabase();
+        ArrayList<vak> Vaklijst = new ArrayList<>();
+
+        Cursor cursor  = db.rawQuery("SELECT * FROM "+ TABLE_NAME + ";", null);
+
+        if (cursor.moveToFirst()) {
+            while(!cursor.isAfterLast()) {
+                System.out.println("name: "+ cursor.getString(cursor.getColumnIndex(VAK_NAME)));
+                System.out.println("ec: "+ cursor.getString(cursor.getColumnIndex(VAK_EC)));
+                System.out.println("desc: "+ cursor.getString(cursor.getColumnIndex(VAK_DESC)));
+                System.out.println("id: "+ cursor.getString(cursor.getColumnIndex(VAK_ID)));
+
+                Vaklijst.add(new vak(
+                        cursor.getString(cursor.getColumnIndex(VAK_NAME)) ,
+
+                        cursor.getString(cursor.getColumnIndex(VAK_EC)) ,
+                        cursor.getString(cursor.getColumnIndex(VAK_DESC))  ,
+                        cursor.getInt(cursor.getColumnIndex(VAK_ID))));
+                cursor.moveToNext();
+
+            }
+
+        }
+
+    return Vaklijst;
+
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

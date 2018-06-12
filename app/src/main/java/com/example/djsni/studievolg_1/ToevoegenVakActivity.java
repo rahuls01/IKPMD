@@ -1,5 +1,7 @@
 package com.example.djsni.studievolg_1;
 
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -79,8 +81,6 @@ public class ToevoegenVakActivity extends AppCompatActivity {
                 }
 
 
-
-
             }
 
             @Override
@@ -90,10 +90,24 @@ public class ToevoegenVakActivity extends AppCompatActivity {
             }
         });
 
-//        vakken.add(new vak("IKPMD TEST","6","Dingetjes",5));
-
-
-
     }
+
+
+
+    public void voegVakToe(View view) {
+        Bundle b = getIntent().getExtras();
+        setContentView(R.layout.activity_overzicht);
+        String studentennummer = b.getString("key");
+        Log.i("hond", studentennummer);
+
+        Intent intent = new Intent(ToevoegenVakActivity.this, OverzichtActivity.class);
+        Bundle c = new Bundle();
+        c.putString("key", studentennummer);
+        intent.putExtras(c);
+        startActivity(intent);
+    }
+
+
+
 
 }

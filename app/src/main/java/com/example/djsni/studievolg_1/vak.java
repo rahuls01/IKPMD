@@ -10,9 +10,11 @@ public class vak {
     }
 
     public vak(String name, String ec, String description, int id) {
-        this.name = this.name;
+        this.name = name;
         this.ec = ec;
-        this.description = this.description;
+        this.description = description;
+        this.id = id ;
+
     };
 
     public String getName() {
