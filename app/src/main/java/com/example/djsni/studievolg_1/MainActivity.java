@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,17 +13,39 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final MyDBHandler myDBHandler = new MyDBHandler(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        boolean check = myDBHandler.checkIfexistNaam();
+        // DIT MOET NOG GEFIXT WORDEN
+       boolean check = false;
+        if(check == false){
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent homeIntent = new Intent(MainActivity.this, HomeActivity.class);
+                     startActivity(homeIntent);
+                    finish();
+                }
+            }, SPLASH_TIME_OUT);
+
+        }else{
+            TextView textView = (TextView) findViewById(R.id.naamTextView);
+            String naam =myDBHandler.getNaam();
+            textView.setText("Welkom terug " + naam);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent homeIntent = new Intent(MainActivity.this, OverzichtActivity.class);
+                    startActivity(homeIntent);
+                    finish();
+                }
+            }, SPLASH_TIME_OUT);
+        }
+
+
 
         //Loading Screen
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent homeIntent = new Intent(MainActivity.this, HomeActivity.class);
-                startActivity(homeIntent);
-                finish();
-            }
-        }, SPLASH_TIME_OUT);
+
     }
 }

@@ -38,24 +38,15 @@ public class OverzichtActivity extends AppCompatActivity {
         Log.i("geert", studentennummer);
         Boolean check =  myDBHandler.checkIfexists();
 
-
-
         if (check == false){
-
             TextView textViewniks = (TextView) findViewById(R.id.niksTextView);
             textViewniks.setText("Je hebt nog geen vakken geselecteerd!");
-
         }
         else {
             TextView textView = (TextView) findViewById(R.id.naamTextView);
             textView.setText("Welkom, " + studentennummer);
-
             ListView lv = (ListView)findViewById(R.id.LVSIMPLE);
-
-
-
             la = new ArrayAdapter<vak>(this, android.R.layout.simple_list_item_1, myDBHandler.getAll());
-
             lv.setAdapter(la);
 
 

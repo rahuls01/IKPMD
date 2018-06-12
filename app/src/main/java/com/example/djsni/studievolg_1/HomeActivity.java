@@ -9,6 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class HomeActivity extends AppCompatActivity {
+    final MyDBHandler myDBHandler = new MyDBHandler(this);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+
+    }
 
     public void onClick(View view) {
         EditText nameEditText = (EditText) findViewById(R.id.nameEditText);
@@ -16,9 +23,11 @@ public class HomeActivity extends AppCompatActivity {
         String naam = nameEditText.getText().toString();
         Intent intent = new Intent(HomeActivity.this , OverzichtActivity.class);
 
+        myDBHandler.addNaam(naam);
         Bundle b = new Bundle();
         b.putString("key", naam);
         intent.putExtras(b);
+
 
         startActivity(intent);
 
@@ -28,9 +37,4 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-    }
 }

@@ -51,17 +51,19 @@ public class MyDBHandler  extends SQLiteOpenHelper {
                 + VAK_NAME + " TEXT,"
                 + VAK_DESC + " TEXT"
                 + ")";
+        System.out.println("dit is een test");
 
-        db.execSQL(CREATE_VAK_TABLE);
 
         String CREATE_NAAM_TABLE = "CREATE TABLE " + TABLE_NAME_2 + "("
-                + NAAM+ " naam,"
+                + NAAM + "TEXT"
                 + ")";
 
-        db.execSQL(CREATE_VAK_TABLE);
+
         db.execSQL(CREATE_NAAM_TABLE);
+        db.execSQL(CREATE_VAK_TABLE);
 
     }
+
 
     public void addVak(vak vak, String snummer) {
 
