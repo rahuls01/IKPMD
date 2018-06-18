@@ -9,16 +9,18 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     //Loading Screen
-    private static int SPLASH_TIME_OUT = 1000;
+    private static int SPLASH_TIME_OUT = 4000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final MyDBHandler myDBHandler = new MyDBHandler(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        boolean check = myDBHandler.checkIfexistNaam();
+        boolean check = myDBHandler.checkIfexistNaam();
         // DIT MOET NOG GEFIXT WORDEN
-       boolean check = false;
+//       bo olean check = false;
+        System.out.println("testaswijhfweaifjweifwe"+ check);
         if(check == false){
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         }else{
             TextView textView = (TextView) findViewById(R.id.naamTextView);
-            String naam =myDBHandler.getNaam();
+            String naam = myDBHandler.getNaam();
             textView.setText("Welkom terug " + naam);
             new Handler().postDelayed(new Runnable() {
                 @Override

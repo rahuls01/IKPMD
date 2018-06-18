@@ -17,14 +17,17 @@ public class MyDBHandler  extends SQLiteOpenHelper {
 //    om de naam op te slaan
     private static final String TABLE_NAME_2 = "Naam";
     public static final String NAAM = "naam";
-
-
+//    om de ec op te slaan
+    private static final String TABLE_NAME_3 = "Studiepunten";
+    public static final String EC = "EC";
 
     public static final String VAK_ID = "id";
     public static final String VAK_SNUMMER = "studentnummer";
     public static final String VAK_EC = "ec";
     public static final String VAK_DESC = "description";
     public static final String VAK_NAME = "name";
+
+
 
     private static MyDBHandler sInstance;
 
@@ -51,16 +54,27 @@ public class MyDBHandler  extends SQLiteOpenHelper {
                 + VAK_NAME + " TEXT,"
                 + VAK_DESC + " TEXT"
                 + ")";
-        System.out.println("dit is een test");
+        System.out.println("dit is een test" );
 
 
         String CREATE_NAAM_TABLE = "CREATE TABLE " + TABLE_NAME_2 + "("
-                + NAAM + "TEXT"
+                + NAAM + " TEXT"
                 + ")";
 
 
+        String CREATE_EC_TABLE = "CREATE TABLE " + TABLE_NAME_3 + "("
+                + EC + " TEXT"
+                + ")";
+
+        System.out.println("dit is een test"+ CREATE_NAAM_TABLE);
+
         db.execSQL(CREATE_NAAM_TABLE);
         db.execSQL(CREATE_VAK_TABLE);
+        db.execSQL(CREATE_EC_TABLE);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
 
@@ -94,19 +108,38 @@ public class MyDBHandler  extends SQLiteOpenHelper {
 
     };
 
+
     public void addNaam(String snummer) {
 
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
         try {
-
             ContentValues values = new ContentValues();
-
             values.put(NAAM, snummer);
-
             db.insertOrThrow(TABLE_NAME_2, null, values);
             db.setTransactionSuccessful();
             System.out.println("De naam word opgeslagen");
+        }
+
+        catch (Exception e) {
+            e.printStackTrace();
+        } finally
+        {
+            db.endTransaction();
+        }
+
+
+    };
+    public void addEC(int studiepunt) {
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            ContentValues values = new ContentValues();
+            values.put(EC, studiepunt);
+            db.insertOrThrow(TABLE_NAME_3, null, values);
+            db.setTransactionSuccessful();
+            System.out.println("De EC word opgeslagen");
         }
 
         catch (Exception e) {
@@ -164,7 +197,6 @@ public class MyDBHandler  extends SQLiteOpenHelper {
 
                 Vaklijst.add(new vak(
                         cursor.getString(cursor.getColumnIndex(VAK_NAME)) ,
-
                         cursor.getString(cursor.getColumnIndex(VAK_EC)) ,
                         cursor.getString(cursor.getColumnIndex(VAK_DESC))  ,
                         cursor.getInt(cursor.getColumnIndex(VAK_ID))));
@@ -178,16 +210,66 @@ public class MyDBHandler  extends SQLiteOpenHelper {
 
     }
 
-    public String getNaam() {
+    public  String getNaam() {
         SQLiteDatabase db = getWritableDatabase();
-        Cursor cursor  = db.rawQuery("SELECT * FROM "+ TABLE_NAME_2 + ";", null);
-        System.out.println("name: "+ cursor.getString(cursor.getColumnIndex(NAAM)));
-        String naam = cursor.getString(cursor.getColumnIndex(NAAM));
+
+        Cursor cursor  = db.rawQuery("SELECT naam FROM "+ TABLE_NAME_2 + ";", null);
+        String naam = "";
+
+        System.out.println("name: ");
+        if (cursor.moveToFirst()) {
+            while(!cursor.isAfterLast()) {
+                naam = cursor.getString(cursor.getColumnIndex(NAAM));
+
+                return naam;
+            }
+        }
         return naam;
+    }
+    public  String getEC() {
+        SQLiteDatabase db = getWritableDatabase();
+
+        Cursor cursor  = db.rawQuery("SELECT EC FROM "+ TABLE_NAME_3 + ";", null);
+        String ec = "";
+
+        System.out.println("name: ");
+        if (cursor.moveToFirst()) {
+            while(!cursor.isAfterLast()) {
+                ec = cursor.getString(cursor.getColumnIndex(EC));
+
+                return ec;
+            }
+        }
+        return ec;
+    }
+    public  int telEC() {
+        SQLiteDatabase db = getWritableDatabase();
+
+        Cursor c  = db.rawQuery("SELECT SUM(EC) FROM "+ TABLE_NAME_3 + ";", null);
+        int amount = 0;
+        if(c.moveToFirst())
+            amount = c.getInt(0);
+        else
+            amount = -1;
+        c.close();
+
+        return amount;
+    }
+    public  void deleteEC(String modulecode) {
+        String module = modulecode;
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.execSQL("DELETE FROM " + TABLE_NAME +
+                " WHERE "+ VAK_NAME +" = "+ "'" + module + "'");
 
     }
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public  void deleteAll() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_NAME +
+                " WHERE "+ VAK_NAME +" != "+ "'" + "waarde" + "'");
+
+        db.execSQL("DELETE FROM " + TABLE_NAME_3 +
+                " WHERE "+ EC +" != "+ "'" + 1 + "'");
 
     }
 }

@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".ToevoegenVakActivity" />
         <activity android:name=".HomeActivity" />
-        <activity android:name=".OverzichtActivity"></activity>
+        <activity android:name=".OverzichtActivity" />
+        <activity android:name=".PieChartActivity"></activity>
     </application>
 
 </manifest>

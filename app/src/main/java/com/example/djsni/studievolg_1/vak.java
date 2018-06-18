@@ -2,23 +2,24 @@ package com.example.djsni.studievolg_1;
 
 public class vak {
 
-    String name, ec, description;
+    String Module, Studiepunten, Omschrijving;
     int id;
 
     public vak() {
 
     }
 
-    public vak(String name, String ec, String description, int id) {
-        this.name = name;
-        this.ec = ec;
-        this.description = description;
+    public vak(String Module, String Studiepunten, String Omschrijving , int id) {
+        this.Module = Module;
+        this.Studiepunten = Studiepunten;
+
+        this.Omschrijving = Omschrijving;
         this.id = id ;
 
     };
 
     public String getName() {
-        return this.name;
+        return this.Module;
     }
 
     public int getid() {
@@ -26,15 +27,16 @@ public class vak {
     }
 
     public String getec() {
-        return this.ec;
+        return this.Studiepunten;
     }
 
     public String getdescription() {
-        return this.description;
-    }
+        return this.Omschrijving;
+}
+
 
     public String toString() {
-        return "Name : " + this.name + "\nDescription : " + this.description + "\n EC : " + this.ec + "\n ID : " + this.id;
+        return "Module: " + this.Module + "\nOmschrijving : " + this.Omschrijving + "\nStudiepunten : " + this.Studiepunten  ;
     }
 
 

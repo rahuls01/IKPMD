@@ -50,7 +50,7 @@ public class ToevoegenVakActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 Toast.makeText(getApplicationContext(),
-                        "Click ListItem Number " + position, Toast.LENGTH_SHORT)
+                        "Vak toegevoegd!", Toast.LENGTH_SHORT)
                         .show();
                         myDBHandler.addVak(vakken.get(position), studentennummer);
 
@@ -66,21 +66,14 @@ public class ToevoegenVakActivity extends AppCompatActivity {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     vak vak = ds.getValue(vak.class);
                     vakken.add(vak);
                 }
-
                 la.notifyDataSetChanged();
-
                 for (vak vak : vakken) {
                     System.out.println(vak.toString());
                 }
-
-
             }
 
             @Override
@@ -98,7 +91,7 @@ public class ToevoegenVakActivity extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         setContentView(R.layout.activity_overzicht);
         String studentennummer = b.getString("key");
-        Log.i("hond", studentennummer);
+
 
         Intent intent = new Intent(ToevoegenVakActivity.this, OverzichtActivity.class);
         Bundle c = new Bundle();

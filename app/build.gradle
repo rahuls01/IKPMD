@@ -31,7 +31,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-base:+'
     implementation 'com.google.android.gms:play-services-location:+'
     implementation 'com.google.android.gms:play-services-maps:+'
-    implementation 'com.google.android.gms:play-services-analytics:+'
+//    implementation 'com.google.android.gms:play-services-analytics:+'
+    implementation 'com.github.PhilJay:MPAndroidChart:v2.1.5'
+    implementation 'com.google.android.gms:play-services-analytics:16.0.0'
 
 }
 
